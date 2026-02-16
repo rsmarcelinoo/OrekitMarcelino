@@ -233,6 +233,9 @@
         <action dev="serrof" type="fix" issue="642">
             Added constructor in FieldNodeDetector to avoid failure in hyperbolic case.
         </action>
+        <action dev="rodrigomarcelino" type="add" issue="1103">
+            Exposed Alpha-5 satellite number parsing in TLE class.
+        </action>
     </release>
     <release version="13.1.1" date="2025-09-14" description="Orekit 13.1.1 is a patch release. It fixes documentation issues and various bugs, including some related to performance.">
         <action dev="luc" type="fix" issue="1817">
