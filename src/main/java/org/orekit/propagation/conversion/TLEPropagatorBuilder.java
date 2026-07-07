@@ -180,7 +180,8 @@ public class TLEPropagatorBuilder extends AbstractAnalyticalPropagatorBuilder<TL
 
         // propagator
         final TLEPropagator propagator =
-                TLEPropagator.selectExtrapolator(tle, getAttitudeProvider(), getMass(), teme, generationAlgorithm);
+                TLEPropagator.selectExtrapolator(tle, getAttitudeProvider(), getMass(), teme);
+        propagator.setTleGenerationAlgorithm(generationAlgorithm);
         getImpulseManeuvers().forEach(propagator::addEventDetector);
         return propagator;
     }
