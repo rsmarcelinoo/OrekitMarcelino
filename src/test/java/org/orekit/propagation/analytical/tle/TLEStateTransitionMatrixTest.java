@@ -220,12 +220,12 @@ public class TLEStateTransitionMatrixTest {
                 TLEPropagator.selectExtrapolator(tleGPS,
                                                   FrameAlignedProvider.of(FramesFactory.getTEME()),
                                                   1000.0,
-                                                  DataContext.getDefault().getFrames().getTEME(),
-                                                  counter);
+                                                  DataContext.getDefault().getFrames().getTEME());
+        propagator.setTleGenerationAlgorithm(counter);
         final AbsoluteDate target = tleGPS.getDate().shiftedBy(120.0);
         propagator.setupMatricesComputation("stm", null, null);
         propagator.propagate(target);
-        // if this fails, DeepSDP4's new constructor isn't being reached
+        // if this fails, DeepSDP4's setter isn't being reached
         Assertions.assertTrue(counter.getCount() > 0);
     }
 
