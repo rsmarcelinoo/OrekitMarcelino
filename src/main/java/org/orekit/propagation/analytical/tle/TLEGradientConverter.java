@@ -50,21 +50,19 @@ class TLEGradientConverter extends AbstractAnalyticalGradientConverter {
     /** Attitude provider. */
     private final AttitudeProvider provider;
 
-    /** TLE generation algorithm. */
-    private final TleGenerationAlgorithm generationAlgorithm;
+    /** Propagator. */
+    private final TLEPropagator propagator;
 
     /** Simple constructor.
      * @param propagator TLE propagator used to access initial orbit
-     * @param generationAlgorithm TLE generation algorithm
      */
-    TLEGradientConverter(final TLEPropagator propagator,
-                         final TleGenerationAlgorithm generationAlgorithm) {
+    TLEGradientConverter(final TLEPropagator propagator) {
         super(propagator, FREE_STATE_PARAMETERS);
         this.tle                 = propagator.getTLE();
         this.teme                = propagator.getFrame();
         this.utc                 = tle.getUtc();
         this.provider            = propagator.getAttitudeProvider();
-        this.generationAlgorithm = generationAlgorithm;
+        this.propagator          = propagator;
     }
 
     /** {@inheritDoc} */
@@ -96,10 +94,11 @@ class TLEGradientConverter extends AbstractAnalyticalGradientConverter {
                 revolutionNumberAtEpoch, bStar, utc);
 
         // TLE
-        final FieldTLE<Gradient> gTLE = generationAlgorithm.generate(state, templateTLE);
+        final TleGenerationAlgorithm algorithm = propagator.getTleGenerationAlgorithm();
+        final FieldTLE<Gradient> gTLE = algorithm.generate(state, templateTLE);
 
         // Return the "Field" propagator
-        return FieldTLEPropagator.selectExtrapolator(gTLE, provider, state.getMass(), teme, parameters, generationAlgorithm);
+        return FieldTLEPropagator.selectExtrapolator(gTLE, provider, state.getMass(), teme, parameters, algorithm);
     }
 
     /** {@inheritDoc} */
