@@ -98,7 +98,10 @@ class TLEGradientConverter extends AbstractAnalyticalGradientConverter {
         final FieldTLE<Gradient> gTLE = algorithm.generate(state, templateTLE);
 
         // Return the "Field" propagator
-        return FieldTLEPropagator.selectExtrapolator(gTLE, provider, state.getMass(), teme, parameters, algorithm);
+        final FieldTLEPropagator<Gradient> fieldPropagator =
+            FieldTLEPropagator.selectExtrapolator(gTLE, provider, state.getMass(), teme, parameters);
+        fieldPropagator.setTleGenerationAlgorithm(algorithm);
+        return fieldPropagator;
     }
 
     /** {@inheritDoc} */
