@@ -616,14 +616,6 @@ public abstract class FieldTLEPropagator<T extends CalculusFieldElement<T>> exte
         this.generationAlgorithm = tleGenerationAlgorithm;
     }
 
-    /** Get the TLE generation algorithm used when resetting TLE from state.
-     * @return TLE generation algorithm
-     * @since 14.0
-     */
-    TleGenerationAlgorithm getTleGenerationAlgorithm() {
-        return generationAlgorithm;
-    }
-
     /** Reset internal TLE from a SpacecraftState.
      * @param state spacecraft state on which to base new TLE
      */
