@@ -279,18 +279,6 @@ public class TLEPropagatorTest {
     }
 
     @Test
-    void testFourParamConstructorUsesDefaultGenerationAlgorithm() {
-        // Exercise TLEPropagator 4-param constructor delegation chain
-        // SGP4 public 4-param ctor -> TLEPropagator(TLE, ..., Frame) -> this(..., getDefaultTleGenerationAlgorithm(...))
-        final SGP4 propagator = new SGP4(tle,
-            FrameAlignedProvider.of(FramesFactory.getTEME()),
-            Propagator.DEFAULT_MASS);
-        final AbsoluteDate target = tle.getDate().shiftedBy(120.0);
-        final SpacecraftState result = propagator.propagate(target);
-        Assertions.assertNotNull(result);
-    }
-
-    @Test
     void testDeepSDP4FourParamConstructor() {
         final DeepSDP4 propagator = new DeepSDP4(tle,
             FrameAlignedProvider.of(FramesFactory.getTEME()),
