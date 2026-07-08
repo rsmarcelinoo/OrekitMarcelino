@@ -296,28 +296,6 @@ public abstract class FieldTLEPropagator<T extends CalculusFieldElement<T>> exte
             final T mass,
             final Frame teme,
             final T[] parameters) {
-        return selectExtrapolator(tle, attitudeProvider, mass, teme, parameters,
-                TLEPropagator.getDefaultTleGenerationAlgorithm(tle.getUtc(), teme));
-    }
-
-    /** Selects the extrapolator to use with the selected TLE.
-     *
-     * @param tle the TLE to propagate.
-     * @param attitudeProvider provider for attitude computation
-     * @param mass spacecraft mass (kg)
-     * @param teme the TEME frame to use for propagation.
-     * @param parameters SGP4 and SDP4 model parameters
-     * @param generationAlgorithm TLE generation algorithm used during TLE resets
-     * @return the correct propagator.
-     * @param <T> elements type
-     */
-    public static <T extends CalculusFieldElement<T>> FieldTLEPropagator<T> selectExtrapolator(
-            final FieldTLE<T> tle,
-            final AttitudeProvider attitudeProvider,
-            final T mass,
-            final Frame teme,
-            final T[] parameters,
-            final TleGenerationAlgorithm generationAlgorithm) {
 
         final T a1 = tle.getMeanMotion().multiply(60.0).reciprocal().multiply(TLEConstants.XKE).pow(TLEConstants.TWO_THIRD);
         final T cosi0 = FastMath.cos(tle.getI());
@@ -340,7 +318,6 @@ public abstract class FieldTLEPropagator<T extends CalculusFieldElement<T>> exte
             propagator = new FieldSGP4<>(tle, attitudeProvider, mass, teme, parameters);
         }
 
-        propagator.setTleGenerationAlgorithm(generationAlgorithm);
         return propagator;
     }
 
@@ -633,8 +610,9 @@ public abstract class FieldTLEPropagator<T extends CalculusFieldElement<T>> exte
 
     /** Set the TLE generation algorithm used when resetting TLE from state.
      * @param tleGenerationAlgorithm TLE generation algorithm
+     * @since 14.0
      */
-    private void setTleGenerationAlgorithm(final TleGenerationAlgorithm tleGenerationAlgorithm) {
+    public void setTleGenerationAlgorithm(final TleGenerationAlgorithm tleGenerationAlgorithm) {
         this.generationAlgorithm = tleGenerationAlgorithm;
     }
 
