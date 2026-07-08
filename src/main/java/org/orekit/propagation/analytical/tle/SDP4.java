@@ -21,7 +21,6 @@ import org.hipparchus.util.MathUtils;
 import org.hipparchus.util.SinCos;
 import org.orekit.attitudes.AttitudeProvider;
 import org.orekit.frames.Frame;
-
 import org.orekit.time.AbsoluteDate;
 import org.orekit.time.DateTimeComponents;
 import org.orekit.utils.Constants;

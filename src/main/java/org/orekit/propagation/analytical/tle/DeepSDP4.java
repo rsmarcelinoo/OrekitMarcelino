@@ -23,7 +23,6 @@ import org.orekit.annotation.DefaultDataContext;
 import org.orekit.attitudes.AttitudeProvider;
 import org.orekit.data.DataContext;
 import org.orekit.frames.Frame;
-
 import org.orekit.time.DateTimeComponents;
 import org.orekit.utils.Constants;
 
