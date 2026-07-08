@@ -101,13 +101,13 @@ public class TLEPropagatorBuilderTest {
         final TLEPropagatorBuilder builder = new TLEPropagatorBuilder(tle, PositionAngleType.MEAN, 1.0, dataContext,
                                                                        counter);
         builder.buildPropagator();
-        Assertions.assertTrue(counter.getStateCalls() > 0);
+        Assertions.assertTrue(counter.stateCalls > 0);
     }
 
     private static class CountingTleGenerationAlgorithm implements TleGenerationAlgorithm {
 
         private final TleGenerationAlgorithm delegate;
-        private int stateCalls;
+        int stateCalls;
 
         CountingTleGenerationAlgorithm(final TleGenerationAlgorithm delegate) {
             this.delegate = delegate;
@@ -124,10 +124,6 @@ public class TLEPropagatorBuilderTest {
                                                                         final FieldTLE<T> templateTLE) {
             stateCalls++;
             return delegate.generate(state, templateTLE);
-        }
-
-        int getStateCalls() {
-            return stateCalls;
         }
 
     }
