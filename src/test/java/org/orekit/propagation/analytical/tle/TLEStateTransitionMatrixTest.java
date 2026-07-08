@@ -186,7 +186,7 @@ public class TLEStateTransitionMatrixTest {
     private static class CountingTleGenerationAlgorithm implements TleGenerationAlgorithm {
 
         private final TleGenerationAlgorithm delegate;
-        private int count;
+        int count;
 
         CountingTleGenerationAlgorithm(final TleGenerationAlgorithm delegate) {
             this.delegate = delegate;
@@ -203,10 +203,6 @@ public class TLEStateTransitionMatrixTest {
                                                                         final FieldTLE<T> previous) {
             count++;
             return delegate.generate(state, previous);
-        }
-
-        public int getCount() {
-            return count;
         }
 
     }
@@ -226,7 +222,7 @@ public class TLEStateTransitionMatrixTest {
         propagator.setupMatricesComputation("stm", null, null);
         propagator.propagate(target);
         // if this fails, DeepSDP4's setter isn't being reached
-        Assertions.assertTrue(counter.getCount() > 0);
+        Assertions.assertTrue(counter.count > 0);
     }
 
 }
