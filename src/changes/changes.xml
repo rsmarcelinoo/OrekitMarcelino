@@ -20,6 +20,9 @@
   </properties>
   <body>
     <release version="13.1.9" date="TBD" description="TBD">
+        <action dev="rodrigomarcelino" type="fix" issue="2025">
+          Fixed bᵀb and bᵀc terms in Coppola encounter duration.
+        </action>
         <action dev="luc" type="fix" issue="2023">
           Fixed EOP fitting when leap seconds are present.
         </action>

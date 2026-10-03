@@ -1304,9 +1304,15 @@ class FieldShortTermEncounter2DDefinitionTest {
 
         // WHEN
         final Binary64 encounterTimeDuration = collisionDefinition.computeCoppolaEncounterDuration();
+        final double   nonFieldEncounterTimeDuration =
+                new ShortTermEncounter2DDefinition(primary.toOrbit(), primaryCovariance.toStateCovariance(),
+                                                   primaryRadius.getReal(),
+                                                   secondary.toOrbit(), secondaryCovariance.toStateCovariance(),
+                                                   secondaryRadius.getReal()).computeCoppolaEncounterDuration();
 
         // THEN
         Assertions.assertEquals(253.82581367832879, encounterTimeDuration.getReal(), 1e-13);
+        Assertions.assertEquals(nonFieldEncounterTimeDuration, encounterTimeDuration.getReal(), 1e-13);
 
     }
 
